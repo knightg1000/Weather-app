@@ -9,7 +9,7 @@ class WeatherViewModel extends ChangeNotifier {
   Weather? weather;
   bool isLoading = false;
 
-  // List to store recent searches
+  // เก็บรายการที่ค้นหาไว้
   final List<Map<String, dynamic>> recentSearches = [];
 
   Future<void> getWeather(String city) async {
@@ -36,7 +36,7 @@ class WeatherViewModel extends ChangeNotifier {
     }
   }
 
-  // Add a new search to the recent searches list
+  // ทำการเพิ่มรายการค้นหาล่าสุดเข้าไปในลิสท์
   void addToRecentSearches({
     required String city,
     required double temperature,
@@ -53,7 +53,7 @@ class WeatherViewModel extends ChangeNotifier {
       },
     );
 
-    // Keep only the 5 most recent searches
+    // เก็บรายการค้นหาล่าสุดไว้ 5 รายการ
     if (recentSearches.length > 5) {
       recentSearches.removeLast();
     }
@@ -61,7 +61,7 @@ class WeatherViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Update the current weather with the selected city's data from recent searches
+  // อัพเดทข้อมูลสภาพอากาศจากการค้นหาล่าสุด
   void updateCurrentWeather(Map<String, dynamic> searchData) {
     weather = Weather(
       city: searchData['city'],
@@ -71,7 +71,7 @@ class WeatherViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Clear all recent searches
+  // Clear ประวัติการค้นหา
   void clearRecentSearches() {
     recentSearches.clear();
     notifyListeners();
